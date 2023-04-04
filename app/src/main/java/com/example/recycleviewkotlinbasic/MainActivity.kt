@@ -11,6 +11,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+//        findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.captain_america)
+
+        imageAdapter()
+//        textAdapter()
+//        numberAdapter()
+    }
+
+    private fun imageAdapter(){
         val image = listOf<Int>(
             R.drawable.captain_america,
             R.drawable.iron_man,
@@ -19,10 +29,6 @@ class MainActivity : AppCompatActivity() {
         )
         val imageAdapter = ImageAdapter( image )
         findViewById<RecyclerView>(R.id.recycleView).adapter = imageAdapter
-
-//        findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.captain_america)
-//        textAdapter()
-//        numberAdapter()
     }
 
     private fun textAdapter(){
