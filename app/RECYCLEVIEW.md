@@ -95,3 +95,43 @@ Sebelumnya kita baru buat adapter di layoutnya dan ini belum selesai, kita harus
       val mainAdapter = MainAdapter( names )
       kalo recycleView nya mau langsung digunakan kita bisa langsung set menjadi findViewById<RecyclerView>(R.id.recycleView).adapter = mainAdapter
       sekarang kita tes apakah nama diatas akan muncul atau tidak
+
+
+Bagian 3
+
+1. Jika data di RycecleView tidak tampil maka kita harus mengecek apakah datanya ada dengan cara log dan lihat hasilnya di logcat
+    Log.e("MainActivity", "size {${names.size}}")
+2. Jika ada maka kita harus mengecek datanya berdasarkan index dari List kita, yang terjadi sebenarnya adalah kita memanggil function onBindViewHolder
+    Log.e("MainActivity", names[1])
+3. Jika ada datanya coba kita looping menggunakan foreach, bisa menggunakan 2 cara
+   names.forEach {
+       Log.e("MainActivity", it)
+   }
+   names.forEach {name ->
+       Log.e("MainActivity", name)
+   }
+4. Jika constructor/ list yang di passing ke Adapter kita berupa integer, maka di onBindViewHolder kita harus mengconvert nya kembali menjadi string dengan menggunakan method toString()
+    
+
+Bagian 4
+
+Menampilkan gambar, dan untuk itu kita harus mempunyai assetnya terlebih dahulu dan meletakannya di drawable
+
+1. Untuk review kita dapat melakukannya dengan membuatnya langsung di activity main sebelum nantinya akan kita pindahkan ke ke layout adapternya
+2. Karena kita melakukan review langsung tanpa recycle view, maka component recycle view dapat kita set visibility nya menjadi gone
+3. Pada saat membuat component / attribut ImageView hal yang paling penting adalah src, dan jangan lupa juga adjustViewBounds = true, agar tidak ada spasi disisi-sisi gambar
+    width dan height nya dapat kita set menjadi wrap_content agar dia fokus dengan image tersebut, dan kita tidak butuh constraintBottom agar dia nempel diatas
+4. Dan karena ini hanya untuk review maka kita dapat menggunakan tools, karena datanya nanti akan kita buat dinamis dari drawable
+5. Sekarang kita dapat memanggilnya di MainActivity untuk memastikan bahwa ini berjalan
+    gunakan findViewById kemudian kita masukan tipenya apa, untuk image kita dapat menggunakan ImageView kemudian masukan id nya kedalam constructor di findViewById
+    untuk menampilkan gambar kita bisa gunakan setImageResource, misalnya saat ini kita akan memanggilnya dengan mengambilnya dari drawable tanpa di looping, sehingga hanya 1 photo, ini digunakan hanya untuk melihat hasilnya
+    jika kita running maka dia akan tampil
+    pada saat kita akan menggunakan setImageView kita dapat lihat tipe data pada argumen adalah Integer, maka untuk Adapternya kita gunakan integer
+6. Buat layout adapter image dan kita cut ImageView yang ada di activity main(point no 1) dan kita ganti TextView nya menjadi ImageView, sekarang layout adapter image telah selesai
+7. Sekarang buat adapter menjadi ImageAdapter yang di copas dari AdapterNumber
+        view holdernya yang sebelumnya TextView diganti menjadi ImageView, dan variabelnya diganti val image
+        onCreateViewHoldernya di set menjadi adapter_image
+        onBindViewHolder nya kita bisa gunakan image sesuai dengan nama variable di ViewHolder dan gunakan setImageResource kita set sesuai denan constrractornya listImage menjadi listImage[position]
+8. di MainActivity kita buat list yang kita ambil dari drawable
+        Komen terlebih dahulu findViewById yang sebelumnya dibuat
+        
