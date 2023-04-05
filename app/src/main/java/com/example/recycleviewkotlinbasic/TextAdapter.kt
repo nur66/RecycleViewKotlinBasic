@@ -1,9 +1,11 @@
 package com.example.recycleviewkotlinbasic
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
 class TextAdapter(
@@ -15,12 +17,20 @@ class TextAdapter(
     )
 
     override fun onBindViewHolder(holder: TextAdapter.ViewHolder, position: Int) {
-        holder.text.text = listName[position]
+        holder.textView.text = listName[position]
+        val name = listName[position]
+        holder.textView.setOnClickListener {
+            Log.i("TextAdapter", name)
+        }
+//        holder.container.setOnClickListener {
+//            Log.e("TextAdapter", name)
+//        }
     }
 
     override fun getItemCount() = listName.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val text = view.findViewById<TextView>(R.id.textView)
+        val textView = view.findViewById<TextView>(R.id.textView)
+        val container = view.findViewById<ConstraintLayout>(R.id.container)
     }
 }

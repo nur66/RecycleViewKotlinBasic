@@ -134,4 +134,36 @@ Menampilkan gambar, dan untuk itu kita harus mempunyai assetnya terlebih dahulu 
         onBindViewHolder nya kita bisa gunakan image sesuai dengan nama variable di ViewHolder dan gunakan setImageResource kita set sesuai denan constrractornya listImage menjadi listImage[position]
 8. di MainActivity kita buat list yang kita ambil dari drawable
         Komen terlebih dahulu findViewById yang sebelumnya dibuat
+        Selebihnya proses yang dilakaukan sama
+
+
+bagian 5
+
+Scroll Horizontal, Vertical, Membuat GRID
+
+1. Error yang sangat umum pada bagian image adalah ketika kita tidak men-set datanya dengan layoutManager
+2. Secara default layout manager memiliki nilai attribut vertical, sehingga seharusnya jika kita ingin listnya tampil vertical kita tidak perlu menambahkan attribut vertical
+        namun apabila kita mau menampilkan viewnya secara horizontal, maka gunakan attribut orientation="Horizontal"
+3. layoutManager dapat kita tulis di 2 tempat, di layout adapter_image nya atau langsung di MainActivity
+        jika di MainActivity sebenarnya kita dapat memanggilnya dengan sederhana yaitu findViewById<RecyclerView>(R.id.recycleView).layoutManager = LinearLayoutManager(this), this disini mewakili class MainActivity
+        atau jika kita ingin menggabungkannya maka kita bisa gunakan apply
+        
+        findViewById<RecyclerView>(R.id.recycleView).apply {
+           layoutManager = LinearLayoutManager(this@MainActivity)     // ini untuk Linear
+           layoutManager = GridLayoutManager(this@MainActivity, 2)    // ini untuk Grid
+           adapter = imageAdapter
+        }
+
+Bagian 6
+
+OnClick
+
+1. Untuk melakukan listener atau aksi kita membutuhkan sebuah view untuk men-set listenernya
+        untuk membuat listener tentunya kita butuh id di layout constraintnya, yang saat ini saya beri nama container
+2. Kita pergi ke TextAdapter untuk menampilkan namanya, pada onBindViewHolder kita tambahkan setOnClickListener dan kurung kurawal, dimana ini adalah tempat aksi yang akan dilakukan
+3. Karena kita menggunakan textview maka agar dia dapat diklik di luar tulisa yang sejajar dengan row, kita bisa set component Textview dengan menjadikan width menjadi match parent,
+        atau kita sebenarnya dapat set dengan constraint dengan mengisi lengkap constraintStart dan constraintEnd menjadi parent
+        kita coba lakukan log, jika di ketik, kita dapat melakukannya di TextAdapter pada fun onBindViewHolder di dalam setOnClickListener
+4. Sekarang kita akan tambahkan id class recycleView di ViewHoldernya pada Class TextAdapter, id recycleView = container ini sudah mewakili seluruh recycleView dan layout adapter yang berkaitan
+5. Sehingga sekarang kita bisa buat onClick pada container tersebut
         

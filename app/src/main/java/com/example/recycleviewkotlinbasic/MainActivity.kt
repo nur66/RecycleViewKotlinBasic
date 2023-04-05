@@ -4,19 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-
 //        findViewById<ImageView>(R.id.imageView).setImageResource(R.drawable.captain_america)
 
-        imageAdapter()
-//        textAdapter()
+//        imageAdapter()
+        textAdapter()
 //        numberAdapter()
     }
 
@@ -28,7 +27,13 @@ class MainActivity : AppCompatActivity() {
             R.drawable.captain_marvel
         )
         val imageAdapter = ImageAdapter( image )
-        findViewById<RecyclerView>(R.id.recycleView).adapter = imageAdapter
+//        findViewById<RecyclerView>(R.id.recycleView).layoutManager = LinearLayoutManager(this)
+//        findViewById<RecyclerView>(R.id.recycleView).adapter = imageAdapter
+        findViewById<RecyclerView>(R.id.recycleView).apply {
+//            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = GridLayoutManager(this@MainActivity, 2)
+            adapter = imageAdapter
+        }
     }
 
     private fun textAdapter(){
@@ -44,7 +49,11 @@ class MainActivity : AppCompatActivity() {
         )
 
         val textAdapter = TextAdapter( names )
-        findViewById<RecyclerView>(R.id.recycleView).adapter = textAdapter
+//        findViewById<RecyclerView>(R.id.recycleView).adapter = textAdapter
+        findViewById<RecyclerView>(R.id.recycleView).apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = textAdapter
+        }
 
         Log.e("MainActivity","size $names.size")
         Log.e("MainActivity", names[0])
